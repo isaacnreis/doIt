@@ -1,17 +1,17 @@
 import express from "express";
-import Task from "../models/Task.js";
+import {
+  getAllTasks,
+  createTask,
+  deleteTask,
+  updateTask,
+} from "../controllers/tasksController.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const tasks = await Task.getAll();
-  res.json(tasks);
-});
-
-router.post("/", async (req, res) => {
-  const { title, description } = req.body;
-  const taskId = await Task.create(title, description);
-  res.status(201).json({ id: taskId, title, description });
-});
+router.get("/", authenticateToken, getAllTasks); // Protege a listagem de tarefas
+router.post("/", authenticateToken, createTask); // Protege a criação de tarefas
+router.put("/:id", authenticateToken, updateTask); // Protege a atualização de tarefas
+router.delete("/:id", authenticateToken, deleteTask); // Protege a exclusão de tarefas
 
 export default router;

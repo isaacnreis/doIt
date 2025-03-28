@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import TaskList from "~/components/TaskList.vue";
 import { useTaskStore } from "~/store/tasks";
 
 const taskStore = useTaskStore();
@@ -44,14 +45,7 @@ onMounted(() => {
     <h1 class="text-2xl font-bold text-primary mb-5">Lista de Tarefas</h1>
 
     <ul v-if="taskStore.tasks.length" class="space-y-4">
-      <li
-        v-for="task in taskStore.tasks"
-        :key="task.id"
-        class="p-4 bg-gray-100 rounded-lg shadow"
-      >
-        <strong>{{ task.title }}</strong
-        >: {{ task.description }}
-      </li>
+      <TaskList :tasks="taskStore.tasks" />
     </ul>
 
     <p v-else class="text-gray-500">Nenhuma tarefa cadastrada.</p>

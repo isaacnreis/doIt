@@ -13,4 +13,17 @@ export default class Task {
     );
     return result.insertId;
   }
+
+  static async update(id, title, description) {
+    const [result] = await pool.query(
+      "UPDATE tasks SET title = ?, description = ? WHERE id = ?",
+      [title, description, id]
+    );
+    return result.affectedRows > 0;
+  }
+
+  static async delete(id) {
+    const [result] = await pool.query("DELETE FROM tasks WHERE id = ?", [id]);
+    return result.affectedRows > 0;
+  }
 }
