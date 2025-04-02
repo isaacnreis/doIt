@@ -1,6 +1,6 @@
 import request from "supertest";
-import app from "../server";
 import { expect, test } from "vitest";
+import app from "../server";
 
 test("Deve registrar um novo usuário", async () => {
   const res = await request(app)
