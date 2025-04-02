@@ -26,7 +26,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://localhost:5000",
+      apiBase:
+        process.env.NUXT_PUBLIC_API_BASE ||
+        "https://doit-production-72f5.up.railway.app/",
     },
   },
 });
