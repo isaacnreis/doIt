@@ -10,7 +10,9 @@ export const useTaskStore = defineStore("taskStore", {
   actions: {
     async fetchTasks() {
       try {
-        this.tasks = await fetchWithAuth<Task[]>(`http://localhost:5000/tasks`);
+        this.tasks = await fetchWithAuth<Task[]>(
+          `https://doit-production-72f5.up.railway.app/tasks`
+        );
       } catch (error) {
         console.error("Erro ao buscar tarefas:", error);
       }
@@ -18,13 +20,16 @@ export const useTaskStore = defineStore("taskStore", {
 
     async addTask(title: string, description: string) {
       try {
-        const task = await fetchWithAuth<Task>(`http://localhost:5000/tasks`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ title, description }),
-        });
+        const task = await fetchWithAuth<Task>(
+          `https://doit-production-72f5.up.railway.app/tasks`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title, description }),
+          }
+        );
         if (task) {
           this.tasks.push(task);
         }
@@ -39,7 +44,7 @@ export const useTaskStore = defineStore("taskStore", {
     ) {
       try {
         const response = await fetchWithAuth(
-          `http://localhost:5000/tasks/${taskId}`,
+          `https://doit-production-72f5.up.railway.app/tasks/${taskId}`,
           {
             method: "PUT",
             headers: {
@@ -58,7 +63,7 @@ export const useTaskStore = defineStore("taskStore", {
     async deleteTask(taskId: number) {
       try {
         const response = await fetchWithAuth(
-          `http://localhost:5000/tasks/${taskId}`,
+          `https://doit-production-72f5.up.railway.app/tasks/${taskId}`,
           {
             method: "DELETE",
           }
