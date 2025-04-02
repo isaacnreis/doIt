@@ -19,11 +19,22 @@ export const updateTask = async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
 
-  const updated = await Task.update(id, title, description);
-  if (updated) {
-    res.json({ message: "Tarefa atualizada com sucesso!" });
-  } else {
-    res.status(404).json({ error: "Tarefa não encontrada" });
+  if (!title || !description) {
+    return res
+      .status(400)
+      .json({ error: "Título e descrição são obrigatórios" });
+  }
+
+  try {
+    const updated = await Task.update(id, title, description);
+    if (updated) {
+      res.json({ message: "Tarefa atualizada com sucesso!" });
+    } else {
+      res.status(404).json({ error: "Tarefa não encontrada" });
+    }
+  } catch (error) {
+    console.error("Erro ao atualizar a tarefa:", error);
+    res.status(500).json({ error: "Erro interno no servidor" });
   }
 };
 

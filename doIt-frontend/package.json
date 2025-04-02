@@ -13,6 +13,8 @@
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@pinia/nuxt": "^0.10.1",
+    "@primeuix/themes": "^1.0.0",
+    "@primevue/forms": "^4.3.3",
     "@vueuse/nuxt": "^13.0.0",
     "nuxt": "^3.16.1",
     "primeicons": "^7.0.0",
@@ -21,6 +23,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@primevue/nuxt-module": "^4.3.3",
     "@types/node": "^22.13.13",
     "cypress": "^14.2.1"
   }

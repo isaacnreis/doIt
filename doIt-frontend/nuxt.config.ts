@@ -1,8 +1,29 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import Lara from "@primeuix/themes/lara";
+
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@pinia/nuxt", "@vueuse/nuxt", "@nuxtjs/tailwindcss"],
+  modules: [
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "@nuxtjs/tailwindcss",
+    "@primevue/nuxt-module",
+  ],
+  css: ["primeicons/primeicons.css"],
+  primevue: {
+    options: {
+      ripple: true,
+      inputVariant: "filled",
+      theme: {
+        preset: Lara,
+        options: {
+          prefix: "p",
+          darkModeSelector: false || "none",
+          cssLayer: false,
+        },
+      },
+    },
+  },
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://localhost:5000",

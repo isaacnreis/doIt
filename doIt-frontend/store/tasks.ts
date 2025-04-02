@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Task } from "@/types/task";
+import { fetchWithAuth } from "~/composables/api";
 
 export const useTaskStore = defineStore("taskStore", {
   state: () => ({
@@ -9,10 +10,7 @@ export const useTaskStore = defineStore("taskStore", {
   actions: {
     async fetchTasks() {
       try {
-        const { data } = await useFetch<Task[]>(`http://localhost:5000/tasks`);
-        if (data.value) {
-          this.tasks = data.value;
-        }
+        this.tasks = await fetchWithAuth<Task[]>(`http://localhost:5000/tasks`);
       } catch (error) {
         console.error("Erro ao buscar tarefas:", error);
       }
@@ -20,13 +18,15 @@ export const useTaskStore = defineStore("taskStore", {
 
     async addTask(title: string, description: string) {
       try {
-        const { data } = await useFetch<Task>(`http://localhost:5000/tasks`, {
+        const task = await fetchWithAuth<Task>(`http://localhost:5000/tasks`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({ title, description }),
         });
-        if (data.value) {
-          this.tasks.push(data.value);
+        if (task) {
+          this.tasks.push(task);
         }
       } catch (error) {
         console.error("Erro ao adicionar tarefa:", error);
@@ -38,11 +38,18 @@ export const useTaskStore = defineStore("taskStore", {
       updatedData: { title: string; description: string }
     ) {
       try {
-        await useFetch(`http://localhost:5000/tasks/${taskId}`, {
-          method: "PUT",
-          body: updatedData,
-        });
+        const response = await fetchWithAuth(
+          `http://localhost:5000/tasks/${taskId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
         this.fetchTasks();
+        return response;
       } catch (error) {
         console.error("Erro ao atualizar a tarefa:", error);
       }
@@ -50,10 +57,14 @@ export const useTaskStore = defineStore("taskStore", {
 
     async deleteTask(taskId: number) {
       try {
-        await useFetch(`http://localhost:5000/tasks/${taskId}`, {
-          method: "DELETE",
-        });
+        const response = await fetchWithAuth(
+          `http://localhost:5000/tasks/${taskId}`,
+          {
+            method: "DELETE",
+          }
+        );
         this.fetchTasks();
+        return response;
       } catch (error) {
         console.error("Erro ao excluir a tarefa:", error);
       }

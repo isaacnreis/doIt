@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { navigateTo } from "#app";
 import { useAuthStore } from "~/store/auth";
 
 const authStore = useAuthStore();
@@ -10,10 +11,14 @@ const password = ref("");
 const login = (email: string, password: string) => {
   authStore.login(email, password);
 };
+
+const goToRegister = () => {
+  navigateTo("/register");
+};
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen">
+  <div class="flex flex-col items-center justify-center">
     <h1 class="text-3xl font-bold text-primary mb-5">Login</h1>
 
     <form
@@ -49,14 +54,14 @@ const login = (email: string, password: string) => {
 
       <p class="mt-2 text-gray-600">Não tem uma conta? Faça seu registro</p>
     </form>
-
-    <NuxtLink to="/register">
+    <div class="w-96 p-6">
       <button
         type="submit"
         class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+        @click="goToRegister"
       >
         Registrar
       </button>
-    </NuxtLink>
+    </div>
   </div>
 </template>

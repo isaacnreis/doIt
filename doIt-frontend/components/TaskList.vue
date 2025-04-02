@@ -86,7 +86,12 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from "primevue";
 import { ref } from "vue";
+import { useTaskStore } from "~/store/tasks";
+
+const tasksStore = useTaskStore();
+const toast = useToast();
 
 const props = defineProps<{
   tasks: Array<{ id: number; title: string; description: string }>;
@@ -108,21 +113,30 @@ const openEditModal = (task: {
 };
 
 const updateTask = async () => {
+  const taskId = editedTask.value.id;
+  const body = {
+    title: editedTask.value.title,
+    description: editedTask.value.description,
+  };
+
   try {
-    await $fetch(`/tasks/${editedTask.value.id}`, {
-      method: "PUT",
-      body: {
-        title: editedTask.value.title,
-        description: editedTask.value.description,
-      },
+    await tasksStore.updateTask(taskId, body);
+    toast.add({
+      severity: "success",
+      summary: "Sucesso",
+      detail: "Tarefa atualizada com sucesso!",
+      life: 3000,
     });
     isEditing.value = false;
-    location.reload();
   } catch (error) {
-    console.error("Erro ao atualizar a tarefa:", error);
+    toast.add({
+      severity: "error",
+      summary: "Erro",
+      detail: "Erro ao atualizar a tarefa!",
+      life: 3000,
+    });
   }
 };
-
 const confirmDelete = (id: number) => {
   taskToDelete.value = id;
   isConfirmingDelete.value = true;
@@ -130,12 +144,23 @@ const confirmDelete = (id: number) => {
 
 const deleteTask = async () => {
   if (taskToDelete.value !== null) {
+    const taskId = taskToDelete.value;
     try {
-      await $fetch(`/tasks/${taskToDelete.value}`, { method: "DELETE" });
+      await tasksStore.deleteTask(taskId);
+      toast.add({
+        severity: "success",
+        summary: "Sucesso",
+        detail: "Tarefa excluída com sucesso!",
+        life: 3000,
+      });
       isConfirmingDelete.value = false;
-      location.reload();
     } catch (error) {
-      console.error("Erro ao excluir a tarefa:", error);
+      toast.add({
+        severity: "error",
+        summary: "Erro",
+        detail: "Erro ao excluir a tarefa!",
+        life: 3000,
+      });
     }
   }
 };

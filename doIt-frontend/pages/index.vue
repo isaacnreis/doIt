@@ -3,7 +3,7 @@
 <template>
   <div class="text-center p-10">
     <h1 class="text-3xl font-bold text-primary">
-      Bem-vindo ao Gerenciador de Tarefas
+      Bem-vindo ao Gerenciador de Tarefas doIt
     </h1>
     <p class="mt-2 text-gray-600">Organize suas tarefas com eficiência.</p>
 
