@@ -7,6 +7,7 @@ export const getAllTasks = async (req, res) => {
 
 export const createTask = async (req, res, next) => {
   try {
+    console.log("Usuário autenticado:", req.user);
     const { title, description } = req.body;
     const taskId = await Task.create(title, description, req.user.id);
     res.status(201).json({ id: taskId, title, description });
