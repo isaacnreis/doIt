@@ -1,75 +1,32 @@
-# Nuxt Minimal Starter
+## **🌐 Frontend \- DoIt**
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+O frontend do DoIt foi desenvolvido com **Nuxt.js 3**, utilizando **Vue.js**, **Pinia** para gerenciamento de estado e **Tailwind CSS** para estilização.
 
-## Setup
+## **🛠 Tecnologias Utilizadas**
 
-Make sure to install dependencies:
+- Nuxt.js 3
+- Vue.js
+- TypeScript
+- Pinia
+- Tailwind CSS
+- Vue Router
 
-```bash
-# npm
+## **📦 Como Rodar o Frontend**
+
+### **1\. Instale as Dependências**
+
+cd frontend
+
 npm install
 
-# pnpm
-pnpm install
+### **2\. Configure as Variáveis de Ambiente**
 
-# yarn
-yarn install
+Crie um arquivo `.env` na raiz do frontend e defina a URL da API:
 
-# bun
-bun install
-```
+NUXT_PUBLIC_API_BASE=https://seu-backend.com
 
-## Development Server
+### **3\. Inicie o Servidor de Desenvolvimento**
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+O frontend estará disponível em `http://localhost:3000`
