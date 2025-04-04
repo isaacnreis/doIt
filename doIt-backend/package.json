@@ -20,7 +20,9 @@
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.0"
+    "knex": "^3.1.0",
+    "mysql2": "^3.14.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
@@ -29,6 +31,7 @@
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.23.0",
     "jsdom": "^26.0.0",
+    "knex-cli": "^1.0.1",
     "nodemon": "^3.1.9",
     "supertest": "^7.1.0",
     "vitest": "^3.0.9"

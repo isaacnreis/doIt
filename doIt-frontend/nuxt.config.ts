@@ -3,13 +3,16 @@ import Lara from "@primeuix/themes/lara";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
     "@pinia/nuxt",
     "@vueuse/nuxt",
     "@nuxtjs/tailwindcss",
     "@primevue/nuxt-module",
   ],
+
   css: ["primeicons/primeicons.css"],
+
   primevue: {
     options: {
       ripple: true,
@@ -24,6 +27,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   runtimeConfig: {
     public: {
       apiBase:
@@ -31,4 +35,6 @@ export default defineNuxtConfig({
         "https://doit-production-72f5.up.railway.app/",
     },
   },
+
+  compatibilityDate: "2025-04-03",
 });
