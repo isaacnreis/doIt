@@ -11,7 +11,7 @@ export const useAuthStore = defineStore("auth", {
     async login(email: string, password: string) {
       try {
         const { data, error } = await useFetch<{ token: string }>(
-          "https://doit-production-72f5.up.railway.app/auth/login",
+          `https://doit-production-72f5.up.railway.app/auth/login`,
           {
             method: "POST",
             body: { email, password },
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore("auth", {
     async register(name: string, email: string, password: string) {
       try {
         const { data, error } = await useFetch<{ token: string }>(
-          "https://doit-production-72f5.up.railway.app/auth/register",
+          `https://doit-production-72f5.up.railway.app/auth/register`,
           {
             method: "POST",
             body: { name, email, password },
